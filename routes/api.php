@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\LivroController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsuarioController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,10 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('/usuario')->group( function() {
-    Route::get('/index', [UsuarioController::class, 'index']);
-    Route::post('/store', [UsuarioController::class, 'store']);
-    Route::get('/{id}', [UsuarioController::class, 'show']);
-    Route::put('/{id}', [UsuarioController::class, 'update']);
-    Route::delete('/{id}', [UsuarioController::class, 'destroy']);
+Route::prefix('/livro')->group( function() {
+    Route::get('/index', [LivroController::class, 'index']);
+    Route::post('/store', [LivroController::class, 'store']);
+    Route::get('/{id}', [LivroController::class, 'show']);
+    Route::put('/{id}', [LivroController::class, 'update']);
+    Route::delete('/{id}', [LivroController::class, 'destroy']);
 });
