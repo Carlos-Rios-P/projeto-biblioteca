@@ -15,7 +15,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return Usuario::all();
+        $users = Usuario::all();
+
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -25,7 +27,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.form');
     }
 
     /**
@@ -36,9 +38,9 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        $user = Usuario::create($request->all());
+        Usuario::create($request->all());
 
-        return $user;
+        return redirect()->route('usuario.index');
     }
 
     /**
@@ -66,9 +68,16 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
+    public function edit($id)
     {
+        try {
+            $user = Usuario::findOrFail($id);
 
+            return view('user.edit', compact('user'));
+
+        } catch (\Throwable $th) {
+            return response()->json(['erro' => 'Usuario não encotrado'], 404);
+        }
     }
 
     /**

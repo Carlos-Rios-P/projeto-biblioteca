@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.main');
 });
 
 Route::prefix('/usuario')->group( function() {
-    Route::post('/store', [UsuarioController::class, 'store']);
+    Route::get('/index', [UsuarioController::class, 'index'])->name('usuario.index');
+    Route::get('/cadastrar', [UsuarioController::class, 'create'])->name('usuario.create');
+    Route::post('/store', [UsuarioController::class, 'store'])->name('usuario.store');
+    Route::get('/editar/{id}', [UsuarioController::class, 'edit'])->name('usuario.edit');
+    Route::get('/{id}', [UsuarioController::class, 'show'])->name('usuario.show');
+    Route::put('/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
+    Route::delete('/{id}', [UsuarioController::class, 'destroy'])->name('usuario.delete');
 });
