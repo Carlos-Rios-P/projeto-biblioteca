@@ -40,6 +40,8 @@ class UsuarioController extends Controller
     {
         Usuario::create($request->all());
 
+        $request->session()->flash('sucesso', "Usuario $request->nome cadastrado com sucesso");
+
         return redirect()->route('usuario.index');
     }
 
@@ -94,7 +96,9 @@ class UsuarioController extends Controller
             $user = Usuario::findOrFail($id);
             $user->update($request->all());
 
-            return $user;
+            $request->session()->flash('sucesso', "Usuario alterado com sucesso");
+
+            return redirect()->route('usuario.index');
 
         } catch (\Throwable $th) {
             return response()->json(['erro' => 'Usuario não encotrado'], 404);
@@ -107,14 +111,16 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         try {
 
             $user = Usuario::findOrFail($id);
             $user->destroy($id);
 
-            return response()->json(['sucess' => "Usuário excluído com sucesso"]);
+            $request->session()->flash('sucesso', "Usuario deletado com sucesso");
+
+            return redirect()->route('usuario.index');
         } catch (\Throwable $th) {
             return response()->json(['erro' => 'Usuario não encotrado'], 404);
         }

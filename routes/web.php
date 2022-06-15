@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\LivroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,14 @@ Route::prefix('/usuario')->group( function() {
     Route::get('/{id}', [UsuarioController::class, 'show'])->name('usuario.show');
     Route::put('/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
     Route::delete('/{id}', [UsuarioController::class, 'destroy'])->name('usuario.delete');
+});
+
+Route::prefix('/livro')->group( function() {
+    Route::get('/index', [LivroController::class, 'index'])->name('livro.index');
+    Route::get('/cadastrar', [LivroController::class, 'create'])->name('livro.create');
+    Route::post('/store', [LivroController::class, 'store'])->name('livro.store');
+    Route::get('/{id}', [LivroController::class, 'show'])->name('livro.show');
+    Route::get('/editar/{id}', [LivroController::class, 'edit'])->name('livro.edit');
+    Route::put('/{id}', [LivroController::class, 'update'])->name('livro.update');
+    Route::delete('/{id}', [LivroController::class, 'destroy'])->name('livro.delete');
 });

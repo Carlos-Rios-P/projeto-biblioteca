@@ -14,9 +14,9 @@ class LivroController extends Controller
      */
     public function index()
     {
-        $book = Livro::all();
+        $livros = Livro::all();
 
-        return $book;
+        return view('book.index', compact('livros'));
     }
 
     /**
@@ -26,7 +26,7 @@ class LivroController extends Controller
      */
     public function create()
     {
-        //
+        return view('book.form');
     }
 
     /**
@@ -37,9 +37,11 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        $book = Livro::create($request->all());
+        Livro::create($request->all());
 
-        return $book;
+        $request->session()->flash('sucesso', "Livro $request->nome adicionado com sucesso");
+
+        return redirect()->route('livro.index');
     }
 
     /**
@@ -68,7 +70,14 @@ class LivroController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $livro = Livro::findOrFail($id);
+
+            return view('book.edit', compact('livro'));
+
+        } catch (\Throwable $th) {
+            return response()->json(['erro' => 'Livro não encotrado'], 404);
+        }
     }
 
     /**
@@ -81,10 +90,12 @@ class LivroController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $book = Livro::findOrFail($id);
-            $book->update($request->all());
+            $livro = Livro::findOrFail($id);
+            $livro->update($request->all());
 
-            return $book;
+            $request->session()->flash('sucesso', "Livro alterado com sucesso");
+
+            return redirect()->route('livro.index');
 
         } catch (\Throwable $th) {
             return response()->json(['erro' => 'Livro não encotrado'], 404);
@@ -97,13 +108,15 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         try {
             $book = Livro::findOrFail($id);
             $book->destroy($id);
 
-            return response()->json('Livro exluido');
+            $request->session()->flash('sucesso', "Livro excluido com sucesso");
+
+            return redirect()->route('livro.index');
 
         } catch (\Throwable $th) {
             return response()->json(['erro' => 'Livro não encotrado'], 404);
