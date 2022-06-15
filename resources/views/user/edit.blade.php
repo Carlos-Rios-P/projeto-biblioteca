@@ -39,7 +39,7 @@
 
             <div class="right-align">
                 <a class="btn-flat waves-effect" href="{{url()->previous()}}">Cancelar</a>
-                <button class="btn waves-effect waves-light" type="submit">Adicionar</button>
+                <button class="btn waves-effect waves-light" type="submit">Alterar</button>
             </div>
 
         </form>
