@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class LivroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LivroRequest $request)
     {
         Livro::create($request->all());
 
@@ -87,7 +88,7 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LivroRequest $request, $id)
     {
         try {
             $livro = Livro::findOrFail($id);
@@ -111,8 +112,8 @@ class LivroController extends Controller
     public function destroy($id, Request $request)
     {
         try {
-            $book = Livro::findOrFail($id);
-            $book->destroy($id);
+            $livro = Livro::findOrFail($id);
+            $livro->destroy($id);
 
             $request->session()->flash('sucesso', "Livro excluido com sucesso");
 
