@@ -18,6 +18,16 @@ class Transacao extends Model
         'status_transacao'
     ];
 
+    public const PENDENTE     = 'Pendente';
+    public const DEVOLVIDO    = 'Devolvido';
+    public const ATRASADO   = 'Atrasado';
+
+    public const STATUS_TRANSACAO = [
+        self::PENDENTE,
+        self::DEVOLVIDO,
+        self::ATRASADO,
+    ];
+
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);

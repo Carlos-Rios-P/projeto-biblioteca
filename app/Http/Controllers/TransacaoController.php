@@ -16,21 +16,31 @@ class TransacaoController extends Controller
         return view('transaction.index', compact('transactions'));
     }
 
+    public function edit()
+    {
+        $users = Usuario::all();
+
+        $livros = Livro::all();
+
+        return view('transaction.form', compact('users', 'livros'));
+    }
+
     public function store($user, $livro, Request $request)
     {
-        $user = Usuario::find($user);
+        echo $user, $livro;
+        // $usuario = Usuario::find($user);
 
-        $livro = Livro::find($livro);
+        // $book = Livro::find($livro);
 
-        $transacao = Transacao::create([
-            'usuario_id'        => $user->id,
-            'livro_id'          => $livro->id,
-            'nome_usuario'      => $user->nome,
-            'nome_livro'        => $livro->nome,
-            'data_devolucao'    => $request->data_devolucao,
-            'status_transacao'  => $request->status_transacao
-        ]);
+        // $transacao = Transacao::create([
+        //     'usuario_id'        => $usuario->id,
+        //     'livro_id'          => $book->id,
+        //     'nome_usuario'      => $usuario->nome,
+        //     'nome_livro'        => $book->nome,
+        //     'data_devolucao'    => $request->data_devolucao,
+        //     'status_transacao'  => $request->status_transacao
+        // ]);
 
-        return response()->json($transacao, 200);
+        // return response()->json($transacao, 200);
     }
 }

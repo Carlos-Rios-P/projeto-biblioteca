@@ -43,7 +43,6 @@ Route::prefix('/livro')->group( function() {
 
 Route::prefix('/transacao')->group( function() {
     Route::get('/index', [TransacaoController::class, 'index'])->name('transacao.index');
-    // Route::get('/create-user', [TransacaoController::class, 'createUser'])->name('transacao.create.user');
-    // Route::get('/create-book', [TransacaoController::class, 'createBook'])->name('transacao.create.book');
-    // Route::get('/form', [TransacaoController::class, 'form'])->name('transacao.form');
+    Route::get('/form', [TransacaoController::class, 'edit'])->name('transacao.form');
+    Route::post('/store/{user}/{livro}', [TransacaoController::class, 'store'])->name('transacao.store');
 });
