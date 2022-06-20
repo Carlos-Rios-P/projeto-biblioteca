@@ -16,11 +16,11 @@ class TransacaoController extends Controller
         return view('transaction.index', compact('transactions'));
     }
 
-    public function edit()
+    public function create()
     {
         $users = Usuario::all();
 
-        $livros = Livro::all();
+        $livros = Livro::all()->where('situacao', '=', 1);
 
         return view('transaction.form', compact('users', 'livros'));
     }
@@ -40,8 +40,50 @@ class TransacaoController extends Controller
             'status_transacao'  => $request->query('status')
         ]);
 
+        $book->update([
+            'situacao' => 0
+        ]);
+
         $request->session()->flash('sucesso', "Transação criada com sucesso");
 
         return redirect()->route('transacao.index');
+    }
+
+    public function edit($id)
+    {
+        try {
+
+            $transaction = Transacao::findOrFail($id);
+
+            return view('transaction.edit', compact('transaction'));
+
+        } catch (\Throwable $th) {
+            return response()->json(['erro' => 'Transação não escontrada'], 404);
+        }
+    }
+
+    public function update($id, Request $request)
+    {
+    try {
+
+        $transaction = Transacao::findOrFail($id);
+
+        $livro = Livro::findOrFail($transaction->livro_id);
+
+        if ($request->status_transacao == 'Devolvido') {
+            $livro->update([
+            'situacao' => 1
+            ]);
+        }
+
+        $transaction->update([
+        'status_transacao' => $request->status_transacao
+        ]);
+
+        return redirect()->route('transacao.index');
+
+    } catch (\Throwable $th) {
+        return response()->json(['erro' => 'Transação não escontrada'], 404);
+    }
     }
 }

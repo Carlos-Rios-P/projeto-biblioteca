@@ -21,7 +21,7 @@
                         <td>{{$transaction->data_devolucao}}</td>
                         <td>{{$transaction->status_transacao}}</td>
                         <td>
-                            <a href="#">
+                            <a href="{{route('transacao.edit', $transaction->id)}}">
                                 <span style="cursor: pointer">
                                     <i class="material-icons blue-text text-darken-1">create</i>
                                 </span>
