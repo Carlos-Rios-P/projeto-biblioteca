@@ -27,20 +27,21 @@ class TransacaoController extends Controller
 
     public function store($user, $livro, Request $request)
     {
-        echo $user, $livro;
-        // $usuario = Usuario::find($user);
+        $usuario = Usuario::find($user);
 
-        // $book = Livro::find($livro);
+        $book = Livro::find($livro);
 
-        // $transacao = Transacao::create([
-        //     'usuario_id'        => $usuario->id,
-        //     'livro_id'          => $book->id,
-        //     'nome_usuario'      => $usuario->nome,
-        //     'nome_livro'        => $book->nome,
-        //     'data_devolucao'    => $request->data_devolucao,
-        //     'status_transacao'  => $request->status_transacao
-        // ]);
+        Transacao::create([
+            'usuario_id'        => $usuario->id,
+            'livro_id'          => $book->id,
+            'nome_usuario'      => $usuario->nome,
+            'nome_livro'        => $book->nome,
+            'data_devolucao'    => $request->query('devolucao'),
+            'status_transacao'  => $request->query('status')
+        ]);
 
-        // return response()->json($transacao, 200);
+        $request->session()->flash('sucesso', "Transação criada com sucesso");
+
+        return redirect()->route('transacao.index');
     }
 }

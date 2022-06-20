@@ -20,7 +20,7 @@ class Transacao extends Model
 
     public const PENDENTE     = 'Pendente';
     public const DEVOLVIDO    = 'Devolvido';
-    public const ATRASADO   = 'Atrasado';
+    public const ATRASADO     = 'Atrasado';
 
     public const STATUS_TRANSACAO = [
         self::PENDENTE,

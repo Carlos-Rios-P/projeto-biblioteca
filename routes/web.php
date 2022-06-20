@@ -44,5 +44,6 @@ Route::prefix('/livro')->group( function() {
 Route::prefix('/transacao')->group( function() {
     Route::get('/index', [TransacaoController::class, 'index'])->name('transacao.index');
     Route::get('/form', [TransacaoController::class, 'edit'])->name('transacao.form');
-    Route::post('/store/{user}/{livro}', [TransacaoController::class, 'store'])->name('transacao.store');
+    Route::post('/form', [TransacaoController::class, 'edit'])->name('transacao.form');
+    Route::get('/store/{user}/{livro}', [TransacaoController::class, 'store'])->name('transacao.store');
 });
