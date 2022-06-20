@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\TransacaoController;
+use App\Models\Transacao;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +39,11 @@ Route::prefix('/livro')->group( function() {
     Route::get('/editar/{id}', [LivroController::class, 'edit'])->name('livro.edit');
     Route::put('/{id}', [LivroController::class, 'update'])->name('livro.update');
     Route::delete('/{id}', [LivroController::class, 'destroy'])->name('livro.delete');
+});
+
+Route::prefix('/transacao')->group( function() {
+    Route::get('/index', [TransacaoController::class, 'index'])->name('transacao.index');
+    // Route::get('/create-user', [TransacaoController::class, 'createUser'])->name('transacao.create.user');
+    // Route::get('/create-book', [TransacaoController::class, 'createBook'])->name('transacao.create.book');
+    // Route::get('/form', [TransacaoController::class, 'form'])->name('transacao.form');
 });

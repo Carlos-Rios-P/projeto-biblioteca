@@ -38,4 +38,9 @@ class Livro extends Model
         'situacao',
         'numero_registro'
     ];
+
+    public function transacao()
+    {
+        return $this->hasOne(Transacao::class);
+    }
 }

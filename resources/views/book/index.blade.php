@@ -44,7 +44,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="2">Não existem usuários cadastrados</td>
+                        <td colspan="2">Não existem livros cadastrados</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -14,4 +14,9 @@ class Usuario extends Model
         'email',
         'numero_cadastro'
     ];
+
+    public function transacao()
+    {
+        return $this->hasOne(Transacao::class);
+    }
 }

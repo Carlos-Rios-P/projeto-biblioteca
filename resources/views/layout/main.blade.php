@@ -21,6 +21,7 @@
             <div class="nav-wrapper">
                 <a href="{{route('usuario.index')}}" class="brand-logo">Biblioteca</a>
                 <ul class="right">
+                    <li><a href="{{route('transacao.index')}}">Transações</a></li>
                     <li><a href="{{route('usuario.index')}}">Usuários</a></li>
                     <li><a href="{{route('livro.index')}}">Livros</a></li>
                 </ul>
