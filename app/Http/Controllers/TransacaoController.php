@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TransacaoRequest;
 use App\Models\Livro;
 use App\Models\Transacao;
 use App\Models\Usuario;
@@ -25,19 +26,19 @@ class TransacaoController extends Controller
         return view('transaction.form', compact('users', 'livros'));
     }
 
-    public function store($user, $livro, Request $request)
+    public function store(TransacaoRequest $request)
     {
-        $usuario = Usuario::find($user);
+        $usuario = Usuario::find($request->user_id);
 
-        $book = Livro::find($livro);
+        $book = Livro::find($request->livro_id);
 
         Transacao::create([
             'usuario_id'        => $usuario->id,
             'livro_id'          => $book->id,
             'nome_usuario'      => $usuario->nome,
             'nome_livro'        => $book->nome,
-            'data_devolucao'    => $request->query('devolucao'),
-            'status_transacao'  => $request->query('status')
+            'data_devolucao'    => $request->data_devolucao,
+            'status_transacao'  => $request->status_transacao
         ]);
 
         $book->update([
