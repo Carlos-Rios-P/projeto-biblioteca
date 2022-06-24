@@ -48,3 +48,5 @@
             var instances = M.FormSelect.init(elems);
         });
     </script>
+</body>
+</html>
